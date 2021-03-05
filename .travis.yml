@@ -26,7 +26,7 @@ addons:
 script:
   # Freaking nasty way to force later python version as default
   - mkdir -p pythonhax
-  - ln -s /usr/bin/python3.8 pythonhax/python && ln -s /usr/bin/python3.8 pythonhax/python3
+  - ln -s /usr/bin/python3.7 pythonhax/python && ln -s /usr/bin/python3.8 pythonhax/python3
   - export PATH=$PWD/pythonhax:$PATH
   - cd BasiliskII/src/Unix
   - NO_CONFIGURE=1 ./autogen.sh
