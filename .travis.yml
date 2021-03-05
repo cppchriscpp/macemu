@@ -1,0 +1,38 @@
+# I can't for the life of me get this thing building locally, so gonna try to do it on travis, where I can more easily
+# play with OS versions/etc
+language: cpp
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: required
+      compiler: gcc
+
+addons:
+  apt:
+    packages:
+      - libsdl1.2-dev 
+      - libgtk2.0-dev
+
+script:
+  - cd BasiliskII/src/Unix
+  - NO_CONFIGURE=1 ./autogen.sh
+  - ./configure --enable-sdl-video --enable-sdl-audio --disable-vosf --disable-jit-compiler --with-x --with-gtk --with-mon
+  - make -j 4
+  - cd ../../..
+  - git clone https://github.com/emscripten-core/emsdk.git
+  - cd emsdk
+  - ./emsdk install latest
+  - ./emsdk activate latest
+  - source ./emsdk_env.sh
+  - cd ../BasiliskII/src/Unix
+  - macemujs_conf_native=1 ./_embuild.sh
+  - make clean
+  - make
+  - echo "If you got here, I am shocked. And in pain. Mostly in pain."
+  - source ../../emsdk/emsdk_env.sh
+  - macemujs_conf_cpu=1 ./_embuild.sh
+  - make mostlyclean && make && ./_emaferbuild.sh
+  - cat BasiliskII-worker.html
+  # TODO: Upload to s3 or something I guess?
