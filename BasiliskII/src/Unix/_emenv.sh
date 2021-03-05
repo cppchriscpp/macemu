@@ -4,7 +4,9 @@ if [[ -n "${macemujs_conf_wasm:-}" ]]; then
   use_wasm="y"
 fi
 emflgs=""
-emflgs+=" -s TOTAL_MEMORY=536870912"
+# @cppchriscpp change
+# emflgs+=" -s TOTAL_MEMORY=536870912"
+emflgs+=" -s TOTAL_MEMORY=536896000"
 emflgs+=" -s FORCE_FILESYSTEM=1"
 if [ -z $use_wasm ]; then
 emflgs+=" -s ASM_JS=1"

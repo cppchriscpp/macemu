@@ -18,7 +18,7 @@ addons:
     working_dir: BasiliskII
     # Grab everything... we can narrow in later.
     paths: 
-      - .
+      - ./*
 
 
 script:
