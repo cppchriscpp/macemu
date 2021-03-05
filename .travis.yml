@@ -14,6 +14,12 @@ addons:
     packages:
       - libsdl1.2-dev 
       - libgtk2.0-dev
+  artifacts:
+    working_dir: BasiliskII
+    # Grab everything... we can narrow in later.
+    paths: 
+      - .
+
 
 script:
   - cd BasiliskII/src/Unix
@@ -31,8 +37,7 @@ script:
   - make clean
   - make
   - echo "If you got here, I am shocked. And in pain. Mostly in pain."
-  - source ../../emsdk/emsdk_env.sh
+  - source ../../../emsdk/emsdk_env.sh
   - macemujs_conf_cpu=1 ./_embuild.sh
-  - make mostlyclean && make && ./_emaferbuild.sh
+  - make mostlyclean && make && ./_emafterbuild.sh
   - cat BasiliskII-worker.html
-  # TODO: Upload to s3 or something I guess?
