@@ -20,9 +20,8 @@ addons:
     paths: 
       - *
 
-
-script:
   # Need latest python, and I can't get it to install the nice way
+script:
   - sudo apt-get install -y software-properties-common && sudo add-apt-repository ppa:deadsnakes/ppa && sudo apt-get update && sudo apt-get install python3.8
   - cd BasiliskII/src/Unix
   - NO_CONFIGURE=1 ./autogen.sh
