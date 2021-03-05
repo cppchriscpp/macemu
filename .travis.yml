@@ -11,19 +11,19 @@ matrix:
 
 addons:
   apt:
-    update: true
     packages:
       - libsdl1.2-dev 
       - libgtk2.0-dev
-      - python3.7
   artifacts:
     working_dir: BasiliskII
     # Grab everything... we can narrow in later.
     paths: 
-      - ./*
+      - *
 
 
 script:
+  # Need latest python, and I can't get it to install the nice way
+  - sudo apt-get install -y software-properties-common && sudo add-apt-repository ppa:deadsnakes/ppa && sudo apt-get update && sudo apt-get install python3.8
   - cd BasiliskII/src/Unix
   - NO_CONFIGURE=1 ./autogen.sh
   - ./configure --enable-sdl-video --enable-sdl-audio --disable-vosf --disable-jit-compiler --with-x --with-gtk --with-mon
