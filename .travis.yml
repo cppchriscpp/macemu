@@ -16,9 +16,7 @@ addons:
       - libgtk2.0-dev
   artifacts:
     working_dir: BasiliskII
-    # Grab everything... we can narrow in later.
-    paths: 
-      - *
+    # Grab everything, hopefully. we can narrow in later.
 
   # Need latest python, and I can't get it to install the nice way
 script:
