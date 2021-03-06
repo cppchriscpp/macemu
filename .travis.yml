@@ -43,10 +43,8 @@ script:
   - ./emsdk activate latest
   - source ./emsdk_env.sh
   - cd ../BasiliskII/src/Unix
-  # Doing this twice feels bonkers, but I'm out of sane ideas
-  - macemujs_conf_native=1 ./_embuild.sh
-  - make
   - macemujs_conf_cpu=1 macemujs_conf_native=1 ./_embuild.sh
+  - make clean
   - make
   - cd ../../../emsdk
   - source ./emsdk_env.sh
