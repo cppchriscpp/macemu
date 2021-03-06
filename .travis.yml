@@ -8,7 +8,7 @@ matrix:
       dist: trusty
       sudo: required
       compiler: gcc
-      
+      env: PYTHON=3.8.8
 
 addons:
   apt:
@@ -21,10 +21,14 @@ addons:
     # Grab everything, hopefully. we can narrow in later.
 
 script:
-  - pyenv update
+  # Update pyenv to update python... frick
+  - pushd /opt/pyenv
+  - git branch --set-upstream-to=origin/master deploy
+  - git pull --ff-only
+  - git checkout v1.2.20
   - pyenv install -v 3.8.8
+  - popd
   - pyenv global 3.8.8
-  - python -V
   - cd BasiliskII/src/Unix
   - NO_CONFIGURE=1 ./autogen.sh
   - ./configure --enable-sdl-video --enable-sdl-audio --disable-vosf --disable-jit-compiler --with-x --with-gtk --with-mon
