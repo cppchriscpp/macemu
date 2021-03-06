@@ -35,6 +35,8 @@ if [[ -z "${macemujs_conf_native:-}" ]]; then
   fi
 else
   {
+    # FIXME: @cppchriscpp experiment
+    cat ./em_config.h
     echo "#define USE_CPU_EMUL_SERVICES 1"
     # echo "#undef __MACH__"
     # echo "#undef __APPLE__"
