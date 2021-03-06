@@ -5,7 +5,7 @@ language: cpp
 matrix:
   include:
     - os: linux
-      dist: trusty
+      dist: xenial
       sudo: required
       compiler: gcc
 
@@ -15,13 +15,13 @@ addons:
       - openssl
       - libsdl1.2-dev 
       - libgtk2.0-dev
+      - python-3.7
+      - python-3.7-dev
   artifacts:
     working_dir: BasiliskII
     # Grab everything, hopefully. we can narrow in later.
 
 script:
-  - pyenv install --list
-  - ls ~/.pyenv/versions/
   - cd BasiliskII/src/Unix
   - NO_CONFIGURE=1 ./autogen.sh
   - ./configure --enable-sdl-video --enable-sdl-audio --disable-vosf --disable-jit-compiler --with-x --with-gtk --with-mon
