@@ -8,6 +8,7 @@ matrix:
       dist: trusty
       sudo: required
       compiler: gcc
+      
 
 addons:
   apt:
@@ -20,12 +21,9 @@ addons:
     # Grab everything, hopefully. we can narrow in later.
 
 script:
-  - curl https://pyenv.run | bash
-  - export PATH="$HOME/.pyenv/bin:$PATH"
-  - eval "$(pyenv init -)"
-  - eval "$(pyenv virtualenv-init -)"
-  - pyenv install -v 3.8
-  - pyenv global 3.8
+  - pyenv update
+  - pyenv install -v 3.8.8
+  - pyenv global 3.8.8
   - python -V
   - cd BasiliskII/src/Unix
   - NO_CONFIGURE=1 ./autogen.sh
