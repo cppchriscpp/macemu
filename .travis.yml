@@ -11,23 +11,22 @@ matrix:
 
 addons:
   apt:
-    sources:
-      - deadsnakes
     packages:
       - openssl
       - libsdl1.2-dev 
       - libgtk2.0-dev
-      - python3.7
-      - python3.7-dev
   artifacts:
     working_dir: BasiliskII
     # Grab everything, hopefully. we can narrow in later.
 
 script:
-  # Freaking nasty way to force later python version as default
-  - mkdir -p pythonhax
-  - ln -s /usr/bin/python3.7 pythonhax/python && ln -s /usr/bin/python3.8 pythonhax/python3
-  - export PATH=$PWD/pythonhax:$PATH
+  - curl https://pyenv.run | bash
+  - export PATH="$HOME/.pyenv/bin:$PATH"
+  - eval "$(pyenv init -)"
+  - eval "$(pyenv virtualenv-init -)"
+  - pyenv install -v 3.8
+  - pyenv global 3.8
+  - python -V
   - cd BasiliskII/src/Unix
   - NO_CONFIGURE=1 ./autogen.sh
   - ./configure --enable-sdl-video --enable-sdl-audio --disable-vosf --disable-jit-compiler --with-x --with-gtk --with-mon
@@ -41,7 +40,7 @@ script:
   - cd ../BasiliskII/src/Unix
   - macemujs_conf_native=1 ./_embuild.sh
   - make
-  - echo "If you got here, I am shocked. And in pain. Mostly in pain. Also, $(which python) $(python3 --version)"
+  - echo "If you got here, I am shocked. And in pain. Mostly in pain. Also, $(which python) $(python3 --version) aaaaand '$PATH'"
   - cd ../../../emsdk
   - source ./emsdk_env.sh
   - cd ../BasiliskII/src/Unix
