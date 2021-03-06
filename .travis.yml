@@ -22,8 +22,8 @@ addons:
     # Grab everything, hopefully. we can narrow in later.
 
 script:
-  - apt-get update
-  - apt-get install -y python-3.7 python-3.7-dev
+  - sudo apt-get update
+  - sudo apt-get install -y python-3.7 python-3.7-dev
   - which python 
   - python -V 
   - cd BasiliskII/src/Unix
