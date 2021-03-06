@@ -45,6 +45,7 @@ script:
   - cd ../BasiliskII/src/Unix
   - macemujs_conf_native=1 ./_embuild.sh
   - make
+  - ./BasiliskII
   - cd ../../../emsdk
   - source ./emsdk_env.sh
   - cd ../BasiliskII/src/Unix
