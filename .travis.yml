@@ -13,6 +13,7 @@ addons:
   apt:
     sources:
       - deadsnakes
+    update: true
     packages:
       - openssl
       - libsdl1.2-dev 
