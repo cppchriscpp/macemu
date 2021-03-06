@@ -11,10 +11,14 @@ matrix:
 
 addons:
   apt:
+    sources:
+      - deadsnakes
     packages:
       - openssl
       - libsdl1.2-dev 
       - libgtk2.0-dev
+      - python3.7
+      - python3.7-dev
   artifacts:
     working_dir: BasiliskII
     # Grab everything, hopefully. we can narrow in later.
@@ -22,11 +26,11 @@ addons:
 script:
   # Freaking nasty way to force later python version as default
   - mkdir -p ./pythonhax
-  - ln -s /usr/bin/python3.7 ./pythonhax/python && ln -s /usr/bin/python3.8 ./pythonhax/python3
-  - ls -lah ./pythonhax
+  - ln -s /usr/bin/python3.7 ./pythonhax/python && ln -s /usr/bin/python3.7 ./pythonhax/python3
   - export PATH=$PWD/pythonhax:$PATH
   - echo $PATH
-  - python --version
+  - python -V
+  - python3 -V
   - cd BasiliskII/src/Unix
   - NO_CONFIGURE=1 ./autogen.sh
   - ./configure --enable-sdl-video --enable-sdl-audio --disable-vosf --disable-jit-compiler --with-x --with-gtk --with-mon
