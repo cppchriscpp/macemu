@@ -23,6 +23,11 @@ addons:
     working_dir: BasiliskII
     # Grab everything, hopefully. we can narrow in later.
 
+# Latest problem: 
+# wasm-ld: error: unknown file type: s_atan.o
+# em++: error: '/home/travis/build/cppchriscpp/macemu/emsdk/upstream/bin/wasm-ld -o BasiliskII.wasm -L/opt/X11/lib obj/main.o obj/prefs.o obj/prefs_items.o obj/sys_unix.o obj/rom_patches.o obj/slot_rom.o obj/rsrc_patches.o obj/emul_op.o obj/macos_util.o obj/xpram.o obj/xpram_unix.o obj/timer.o obj/timer_unix.o obj/adb.o obj/serial.o obj/ether.o obj/sony.o obj/disk.o obj/cdrom.o obj/scsi.o obj/video.o obj/video_blit.o obj/vm_alloc.o obj/sigsegv.o obj/audio.o obj/extfs.o obj/disk_sparsebundle.o obj/tinyxml2.o obj/user_strings.o obj/user_strings_unix.o obj/sshpty.o obj/strlcpy.o obj/rpc_unix.o obj/video_sdl.o obj/extfs_unix.o obj/serial_dummy.o obj/ether_dummy.o obj/scsi_dummy.o obj/audio_oss_esd.o obj/prefs_editor_dummy.o obj/main_unix.o obj/prefs_unix.o obj/clip_dummy.o obj/basilisk_glue.o obj/memory.o obj/newcpu.o obj/readcpu.o obj/fpu_ieee.o obj/cpustbl.o obj/cpudefs.o obj/cpuemu1.o obj/cpuemu2.o obj/cpuemu3.o obj/cpuemu4.o obj/cpuemu5.o obj/cpuemu6.o obj/cpuemu7.o obj/cpuemu8.o /usr/lib/x86_64-linux-gnu/libm.a /usr/lib/x86_64-linux-gnu/librt.a -L/usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/libSDL.a -L/home/travis/build/cppchriscpp/macemu/emsdk/upstream/emscripten/cache/sysroot/lib/wasm32-emscripten /home/travis/build/cppchriscpp/macemu/emsdk/upstream/emscripten/cache/sysroot/lib/wasm32-emscripten/libgl.a /home/travis/build/cppchriscpp/macemu/emsdk/upstream/emscripten/cache/sysroot/lib/wasm32-emscripten/libal.a /home/travis/build/cppchriscpp/macemu/emsdk/upstream/emscripten/cache/sysroot/lib/wasm32-emscripten/libhtml5.a /home/travis/build/cppchriscpp/macemu/emsdk/upstream/emscripten/cache/sysroot/lib/wasm32-emscripten/libc.a /home/travis/build/cppchriscpp/macemu/emsdk/upstream/emscripten/cache/sysroot/lib/wasm32-emscripten/libcompiler_rt.a /home/travis/build/cppchriscpp/macemu/emsdk/upstream/emscripten/cache/sysroot/lib/wasm32-emscripten/libc++-noexcept.a /home/travis/build/cppchriscpp/macemu/emsdk/upstream/emscripten/cache/sysroot/lib/wasm32-emscripten/libc++abi-noexcept.a /home/travis/build/cppchriscpp/macemu/emsdk/upstream/emscripten/cache/sysroot/lib/wasm32-emscripten/libdlmalloc.a /home/travis/build/cppchriscpp/macemu/emsdk/upstream/emscripten/cache/sysroot/lib/wasm32-emscripten/libc_rt_wasm.a /home/travis/build/cppchriscpp/macemu/emsdk/upstream/emscripten/cache/sysroot/lib/wasm32-emscripten/libsockets.a -mllvm -combiner-global-alias-analysis=false -mllvm -enable-emscripten-sjlj -mllvm -disable-lsr --lto-legacy-pass-manager --allow-undefined --strip-debug --export main --export emscripten_stack_get_end --export emscripten_stack_get_free --export emscripten_stack_init --export stackSave --export stackRestore --export stackAlloc --export __wasm_call_ctors --export fflush --export __errno_location --export usleep --export malloc --export free --export setThrew --export _get_tzname --export _get_daylight --export _get_timezone --export htonl --export htons --export ntohs --export memcpy --export emscripten_main_thread_process_queued_calls --export memset --export memalign --export-table -z stack-size=5242880 --initial-memory=16777216 --no-entry --max-memory=16777216 --global-base=1024' failed (1)
+# Take a break, do stuff with squishy again. It's fun and we're making good progress
+
 script:
   # Freaking nasty way to force later python version as default
   - mkdir -p ./pythonhax
@@ -51,6 +56,6 @@ script:
   - cd ../BasiliskII/src/Unix
   - macemujs_conf_cpu=1 ./_embuild.sh
   - make mostlyclean 
-  - make 
+  - emmake make 
   - ./_emafterbuild.sh
   - cat BasiliskII-worker.html
